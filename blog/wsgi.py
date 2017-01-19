@@ -4,11 +4,12 @@ from aiohttp_mako import setup, TemplateLookup
 from aiohttp.web import Application, run_app
 
 from blog import views, mako_tmp
-from blog.controllers.root import root
+from blog.controllers.root import root, login
 
 
 app = Application()
 app.router.add_route('GET', '/', root)
+app.router.add_route('GET', '/login', login)
 
 # Setup and configure Mako
 mako_setup = setup(
@@ -22,8 +23,10 @@ views_path = path.abspath(path.join(path.dirname(views.__file__)))
 mako_tmp_path = path.abspath(path.join(path.dirname(mako_tmp.__file__)))
 mako_lookup = TemplateLookup([views_path], module_directory=mako_tmp_path)
 
-index = mako_lookup.get_template('index.mak')
-mako_setup.put_template('index.mak', index)
+index_template = mako_lookup.get_template('index.mak')
+login_template = mako_lookup.get_template('login.mak')
+mako_setup.put_template('index.mak', index_template)
+mako_setup.put_template('login.mak', login_template)
 
 # End of Mako configuration
 run_app(app)
