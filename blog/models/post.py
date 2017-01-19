@@ -2,9 +2,9 @@
 
 class Post(object):
     def __init__(self, title, details, image=None):
-        self.title = title
+        self.title = title  # Unique
         self.details = details
         self.image = image
 
-    def __repr__(self):
-        return self.title
+    def as_dict(self):
+        yield dict(title=self.title, details=self.details)

@@ -7,7 +7,7 @@ testpkgs = [
 
 ]
 install_requires = [
-    'redis',
+    'asyncio_redis',
     'aiohttp',
     'aiohttp_mako'
 ]

@@ -2,14 +2,16 @@ from os import path
 
 from aiohttp_mako import setup, TemplateLookup
 from aiohttp.web import Application, run_app
+import asyncio_redis
 
 from blog import views, mako_tmp
-from blog.controllers.root import root, login
+from blog.controllers.root import root, login, login_handler
 
 
 app = Application()
 app.router.add_route('GET', '/', root)
 app.router.add_route('GET', '/login', login)
+app.router.add_route('POST', '/login_handler', login_handler)
 
 # Setup and configure Mako
 mako_setup = setup(
