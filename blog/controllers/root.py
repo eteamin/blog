@@ -1,6 +1,6 @@
 import json
 
-from aiohttp.web import HTTPOk
+from aiohttp.web import HTTPOk, HTTPBadRequest
 from aiohttp_mako import template
 
 from blog.models.post import Post
@@ -21,12 +21,15 @@ async def login(request):
 
 async def login_handler(request):
     params = await request.post()
-    username = params['username']
-    password = params['password']
-    result = json.loads(wsgi.connection.get('admin').decode())
-    assert username == result['username']
-    assert password == result['password']
-    return HTTPOk()
+    username = params.get('username')
+    password = params.get('password')
+    if username and password:
+        result = json.loads(wsgi.connection.get('admin').decode())
+        assert username == result['username']
+        assert password == result['password']
+        return HTTPOk()
+    else:
+        return HTTPBadRequest()
 
 
 #
