@@ -1,7 +1,12 @@
 from os import path
+import base64
 
 from aiohttp_mako import setup, TemplateLookup
 from aiohttp.web import Application, run_app
+
+from cryptography import fernet
+from aiohttp_session import setup, get_session, session_middleware
+from aiohttp_session.cookie_storage import EncryptedCookieStorage
 import redis
 
 from blog import views, mako_tmp
@@ -32,4 +37,10 @@ mako_setup.put_template('login.mak', login_template)
 
 connection = redis.StrictRedis()
 # End of Mako configuration
+
+# Configuring session
+session_opts = {
+    'session.type': 'file',
+    'session.cookie_expires': True,
+}
 run_app(app)
