@@ -1,15 +1,16 @@
-import asyncio_redis
+import json
+
+from aiohttp.web import HTTPOk
 from aiohttp_mako import template
 
 from blog.models.post import Post
 from blog.helpers import authorize
+from blog import wsgi
 
 
 @template('index.mak')
 async def root(request):
-    r = await asyncio_redis.Connection.create()
-    # Getting the last 10 posts
-    result = await r.get('test')
+    result = wsgi.connection.get('test')
     return dict(ok=result)
 
 
@@ -19,7 +20,14 @@ async def login(request):
 
 
 async def login_handler(request):
-    pass
+    params = await request.post()
+    username = params['username']
+    password = params['password']
+    result = json.loads(wsgi.connection.get('admin').decode())
+    assert username == result['username']
+    assert password == result['password']
+    return HTTPOk()
+
 
 #
 # @authorize

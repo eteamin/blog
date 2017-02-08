@@ -2,7 +2,7 @@ from os import path
 
 from aiohttp_mako import setup, TemplateLookup
 from aiohttp.web import Application, run_app
-import asyncio_redis
+import redis
 
 from blog import views, mako_tmp
 from blog.controllers.root import root, login, login_handler
@@ -30,5 +30,6 @@ login_template = mako_lookup.get_template('login.mak')
 mako_setup.put_template('index.mak', index_template)
 mako_setup.put_template('login.mak', login_template)
 
+connection = redis.StrictRedis()
 # End of Mako configuration
 run_app(app)
