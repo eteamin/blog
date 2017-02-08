@@ -13,7 +13,7 @@ import redis
 from blog import views, mako_tmp
 from blog.controllers.root import root, login, login_handler
 
-connection = redis.StrictRedis()
+redis_connection = redis.StrictRedis()
 config = None
 
 

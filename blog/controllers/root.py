@@ -11,13 +11,13 @@ from blog import wsgi
 
 @template('index.mak')
 async def root(request):
-    result = wsgi.connection.get('test')
-    return dict(ok=result)
+    result = wsgi.redis_connection.get('test')
+    return dict()
 
 
 @template('login.mak')
 async def login(request):
-    return dict(ok=True)
+    return dict()
 
 
 async def login_handler(request):
@@ -28,7 +28,7 @@ async def login_handler(request):
     if 'token' in session and session['token'] == wsgi.config.get('token'):
         return HTTPFound('/')
     if username and password:
-        result = json.loads(wsgi.connection.get('admin').decode())
+        result = json.loads(wsgi.redis_connection.get('admin').decode())
         if username == result['username'] and password == result['password']:
             session['token'] = wsgi.config.get('token')
             return HTTPFound('/')
