@@ -25,6 +25,7 @@ async def login_handler(request):
     username = params.get('username')
     password = params.get('password')
     session = await get_session(request)
+    # If already logged in
     if 'token' in session and session['token'] == wsgi.config.get('token'):
         return HTTPFound('/')
     if username and password:
