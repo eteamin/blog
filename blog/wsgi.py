@@ -4,7 +4,6 @@ import json
 
 from aiohttp_mako import TemplateLookup, setup as make_configuration
 from aiohttp.web import Application, run_app
-
 from cryptography import fernet
 from aiohttp_session import setup
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
