@@ -1,6 +1,6 @@
 import json
 
-from aiohttp.web import HTTPOk, HTTPBadRequest
+from aiohttp.web import HTTPFound, HTTPUnauthorized
 from aiohttp_mako import template
 from aiohttp_session import get_session
 
@@ -22,17 +22,18 @@ async def login(request):
 
 async def login_handler(request):
     params = await request.post()
-    username = await params.get('username')
-    password = await params.get('password')
+    username = params.get('username')
+    password = params.get('password')
     session = await get_session(request)
-    if 'token' in session and session['token'] == token_secret
+    if 'token' in session and session['token'] == wsgi.config.get('token'):
+        return HTTPFound('/')
     if username and password:
         result = json.loads(wsgi.connection.get('admin').decode())
-        if username == result['username'] and  password == result['password']:
-
-        return HTTPOk()
+        if username == result['username'] and password == result['password']:
+            session['token'] = wsgi.config.get('token')
+            return HTTPFound('/')
     else:
-        return HTTPBadRequest()
+        return HTTPUnauthorized()
 
 
 #

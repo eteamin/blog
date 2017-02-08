@@ -1,5 +1,6 @@
 from os import path
 import base64
+import json
 
 from aiohttp_mako import TemplateLookup, setup as make_configuration
 from aiohttp.web import Application, run_app
@@ -13,6 +14,7 @@ from blog import views, mako_tmp
 from blog.controllers.root import root, login, login_handler
 
 connection = redis.StrictRedis()
+config = None
 
 
 def make_app():
@@ -43,6 +45,12 @@ def make_app():
     fernet_key = fernet.Fernet.generate_key()
     secret_key = base64.urlsafe_b64decode(fernet_key)
     setup(app, EncryptedCookieStorage(secret_key))
+
+    # Load configuration
+    configuration_file = path.abspath(path.join(path.dirname(views.__file__), '..', 'configuration.json'))
+    with open(configuration_file, 'r') as json_config:
+        global config
+        config = json.load(json_config)
     return app
 
 run_app(make_app())
