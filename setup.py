@@ -9,7 +9,9 @@ testpkgs = [
 install_requires = [
     'redis',
     'aiohttp',
-    'aiohttp_mako'
+    'aiohttp_mako',
+    'cryptography',
+    'aiohttp_session'
 ]
 
 setup(
