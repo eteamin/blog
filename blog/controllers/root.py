@@ -33,9 +33,11 @@ async def login_handler(request):
         if username == result['username'] and password == result['password']:
             session['token'] = wsgi.config.get('token')
             return HTTPFound('/')
+        else:
+            return HTTPUnauthorized()
     else:
-        return HTTPUnauthorized()
-
+        # TODO: return httpbadrequest()
+        return # Httpbadrequest()
 
 #
 # @authorize
