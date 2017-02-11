@@ -1,6 +1,6 @@
 import json
 
-from aiohttp.web import HTTPFound, HTTPUnauthorized
+from aiohttp.web import HTTPFound, HTTPUnauthorized, HTTPBadRequest
 from aiohttp_mako import template
 from aiohttp_session import get_session
 
@@ -36,8 +36,7 @@ async def login_handler(request):
         else:
             return HTTPUnauthorized()
     else:
-        # TODO: return httpbadrequest()
-        return # Httpbadrequest()
+        return HTTPBadRequest()
 
 #
 # @authorize
