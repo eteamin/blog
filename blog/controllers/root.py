@@ -57,4 +57,4 @@ async def submit_post(request):
     post = Post(title, description, image)
     if wsgi.redis_connection.get(post.title):
         return HTTPBadRequest(text='Duplicate Title!')
-    wsgi.redis_connection.set(title, post.as_dict())
+    wsgi.redis_connection.set(title, await post.as_dict())
