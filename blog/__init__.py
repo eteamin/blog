@@ -1,1 +1,1 @@
-from .wsgi import connection
+from .wsgi import redis_connection

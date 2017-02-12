@@ -1,5 +1,7 @@
 import aiofiles
 
+from blog import wsgi
+
 
 class Post(object):
     def __init__(self, title, description, image=None):
@@ -10,14 +12,16 @@ class Post(object):
             self.store_image()
 
     def as_dict(self):
-        yield dict(title=self.title, description=self.description)
+        yield dict(title=self.title, description=self.description, image_path=self.image_path)
 
     async def store_image(self):
-        pass
-        # async with aiofiles.open()
+        async with aiofiles.open(self.image_path, 'wb') as stored_image:
+            while True:
+                chunk = await self.image.file.read()
+                if not chunk:
+                    break
+                await stored_image.write(chunk)
 
     @property
-    async def image_path(self):
-        return
-
-
+    def image_path(self):
+        return '{}/{}'.format(wsgi.storage_path, self.image.name)

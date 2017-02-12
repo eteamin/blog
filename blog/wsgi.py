@@ -9,11 +9,12 @@ from aiohttp_session import setup
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
 import redis
 
-from blog import views, mako_tmp
+from blog import views, mako_tmp, public
 from blog.controllers.root import root, login, login_handler, admin, submit_post
 
 redis_connection = redis.StrictRedis()
 config = None
+storage_path = path.abspath(path.join(path.dirname(public.__file__), 'storage'))
 
 
 def make_app():
@@ -23,7 +24,7 @@ def make_app():
     app.router.add_route('GET', '/login', login)
     app.router.add_route('POST', '/login_handler', login_handler)
     app.router.add_route('GET', '/admin', admin)
-    app.router.add_route('POST', '/submit_post', submit_post)
+    app.router.add_route('POST', '/admin/submit_post', submit_post)
 
     # Setup and configure Mako
     mako_setup = make_configuration(
@@ -39,9 +40,10 @@ def make_app():
 
     index_template = mako_lookup.get_template('index.mak')
     login_template = mako_lookup.get_template('login.mak')
+    admin_template = mako_lookup.get_template('admin.mak')
     mako_setup.put_template('index.mak', index_template)
     mako_setup.put_template('login.mak', login_template)
-
+    mako_setup.put_template('admin.mak', admin_template)
     # Configuring session
     fernet_key = fernet.Fernet.generate_key()
     secret_key = base64.urlsafe_b64decode(fernet_key)
