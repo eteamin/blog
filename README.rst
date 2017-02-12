@@ -1,8 +1,6 @@
-# blog
 my own blog (full async)
 
-framework: aiohttp
-
+back-end framework: aiohttp
 database: Redis
-
-template_engin: Mako
+template_engine: Mako
+styles: Sass
