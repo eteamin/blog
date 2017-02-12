@@ -1,10 +1,10 @@
 
 
 class Post(object):
-    def __init__(self, title, details, image=None):
+    def __init__(self, title, description, image=None):
         self.title = title  # Unique
-        self.details = details
+        self.description = description
         self.image = image
 
     def as_dict(self):
-        yield dict(title=self.title, details=self.details)
+        yield dict(title=self.title, description=self.description)

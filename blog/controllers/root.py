@@ -50,8 +50,11 @@ async def submit_post(request):
     params = await request.post()
     title = params.get('title')
     description = params.get('description')
-
-
-
-
-
+    image = params.get('image')
+    if not title or not description:
+        return HTTPBadRequest()
+    # TODO: Handle Image storage
+    post = Post(title, description, image)
+    if wsgi.redis_connection.get(post.title):
+        return HTTPBadRequest(text='Duplicate Title!')
+    wsgi.redis_connection.set(title, post.as_dict())
