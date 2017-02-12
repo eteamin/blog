@@ -32,16 +32,26 @@ async def login_handler(request):
         result = json.loads(wsgi.redis_connection.get('admin').decode())
         if username == result['username'] and password == result['password']:
             session['token'] = wsgi.config.get('token')
-            return HTTPFound('/')
+            return HTTPFound('/admin')
         else:
             return HTTPUnauthorized()
     else:
         return HTTPBadRequest()
 
-#
-# @authorize
-# @template('admin.mak')
-# async def admin(request):
-#     pass
-#
-#
+
+@authorize
+@template('admin.mak')
+async def admin(request):
+    return dict()
+
+
+@authorize
+async def submit_post(request):
+    params = await request.post()
+    title = params.get('title')
+    description = params.get('description')
+
+
+
+
+

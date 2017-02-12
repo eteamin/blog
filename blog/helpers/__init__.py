@@ -1,11 +1,14 @@
 from aiohttp.web_exceptions import HTTPUnauthorized
+from aiohttp_session import get_session
+
+from blog import wsgi
 
 
 def authorize(f):
-    def wrapper(*args, **kwargs):
+    async def wrapper(*args, **kwargs):
         request = args[0]
-        if 'has_admin_permission' not in request.environ:
+        session = await get_session(request)
+        if 'token' not in session or session['token'] != wsgi.config.get('token'):
             return HTTPUnauthorized()
-        # TODO: Handle this
         return f(*args, **kwargs)
-    return wrapper
+    yield from wrapper

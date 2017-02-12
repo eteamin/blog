@@ -10,7 +10,7 @@ from aiohttp_session.cookie_storage import EncryptedCookieStorage
 import redis
 
 from blog import views, mako_tmp
-from blog.controllers.root import root, login, login_handler
+from blog.controllers.root import root, login, login_handler, admin, submit_post
 
 redis_connection = redis.StrictRedis()
 config = None
@@ -22,6 +22,8 @@ def make_app():
     app.router.add_route('GET', '/', root)
     app.router.add_route('GET', '/login', login)
     app.router.add_route('POST', '/login_handler', login_handler)
+    app.router.add_route('GET', '/admin', admin)
+    app.router.add_route('POST', '/submit_post', submit_post)
 
     # Setup and configure Mako
     mako_setup = make_configuration(
