@@ -51,7 +51,6 @@ async def submit_post(request):
     # params = await request.multipart()
     # data = await params.next()
     # another_data = await params.next()
-    print()
     # title = params.get('title')
     # description = params.get('description')
     # image = params.next()
