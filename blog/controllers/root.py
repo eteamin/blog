@@ -59,3 +59,4 @@ async def submit_post(request):
     await post.store_image()
     wsgi.redis_connection.set(title, post.as_dict())
     return HTTPFound('/')
+
