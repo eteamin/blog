@@ -11,8 +11,8 @@ from blog import wsgi
 
 @template('index.mak')
 async def root(request):
-    result = wsgi.redis_connection.get('test')
-    return dict()
+    result = wsgi.redis_connection.get('asdafgfd')
+    return dict(result=result)
 
 
 @template('login.mak')
@@ -47,17 +47,15 @@ async def admin(request):
 
 # @authorize
 async def submit_post(request):
-    # params = await request.multipart()
-    # data = await params.next()
-    # another_data = await params.next()
-    print()
-    # title = params.get('title')
-    # description = params.get('description')
-    # image = params.next()
-    # if not title or not description:
-    #     return HTTPBadRequest()
-    # post = Post(title, description, image)
-    # if wsgi.redis_connection.get(post.title):
-    #     return HTTPBadRequest(text='Duplicate Title!')
-    # await post.store_image()
-    # wsgi.redis_connection.set(title, await post.as_dict())
+    params = await request.post()
+    title = params.get('title')
+    description = params.get('description')
+    image = params.get('image')
+    if not title or not description:
+        return HTTPBadRequest()
+    post = Post(title, description, image)
+    if wsgi.redis_connection.get(post.title):
+        return HTTPBadRequest(text='Duplicate Title!')
+    await post.store_image()
+    wsgi.redis_connection.set(title, post.as_dict())
+    return HTTPFound('/')
