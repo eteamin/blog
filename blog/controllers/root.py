@@ -11,8 +11,12 @@ from blog import wsgi
 
 @template('index.mak')
 async def root(request):
-    result = wsgi.redis_connection.get('asdafgfd')
-    return dict(result=result)
+    posts = []
+    keys = wsgi.redis_connection.keys()[:10]
+    for k in keys:
+        v = wsgi.redis_connection.get(k)
+        posts.append((k, v))
+    return dict(posts=posts)
 
 
 @template('login.mak')

@@ -1,1 +1,1 @@
-${result}
+${posts}
