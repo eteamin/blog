@@ -1,6 +1,10 @@
+from os import path
+import json
+
 import aiofiles
 
-from blog import wsgi
+
+STORAGE = path.abspath(path.join(path.dirname(__file__), '..', 'public', 'storage'))
 
 
 class Post(object):
@@ -9,8 +13,8 @@ class Post(object):
         self.description = description
         self.image = image
 
-    def as_dict(self):
-        yield dict(title=self.title, description=self.description, image_path=self.image_path)
+    def as_string(self):
+        return json.dumps(dict(title=self.title, description=self.description, image=True if self.image else False))
 
     async def store_image(self):
         if self.image:
@@ -23,4 +27,4 @@ class Post(object):
 
     @property
     def image_path(self):
-        return '{}/{}'.format(wsgi.storage_path, self.title)
+        return '{}/{}'.format(STORAGE, self.title)

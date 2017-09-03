@@ -5,17 +5,15 @@ from aiohttp_mako import template
 from aiohttp_session import get_session
 
 from blog.models.post import Post
-from blog.helpers import authorize
-from blog import wsgi
 
 
 @template('index.mak')
-async def root(request):
+async def index(request):
     posts = []
-    keys = wsgi.redis_connection.keys()[:10]
-    for k in keys:
-        v = wsgi.redis_connection.get(k)
-        posts.append((k, v))
+    all = await request.app['redis'].keys(pattern='*')
+    for r in all:
+        v = await request.app['redis'].get(r.result())
+        posts.append(json.loads(v))
     return dict(posts=posts)
 
 
@@ -30,12 +28,12 @@ async def login_handler(request):
     password = params.get('password')
     session = await get_session(request)
     # If already logged in
-    if 'token' in session and session['token'] == wsgi.config.get('token'):
+    if 'token' in session and session['token'] == request.app['config'].get('token'):
         return HTTPFound('/')
     if username and password:
-        result = json.loads(wsgi.redis_connection.get('admin').decode())
+        result = json.loads(request.app['config'].get('admin').decode())
         if username == result['username'] and password == result['password']:
-            session['token'] = wsgi.config.get('token')
+            session['token'] = request.app['config'].get('token')
             return HTTPFound('/admin')
         else:
             return HTTPUnauthorized()
@@ -58,9 +56,9 @@ async def submit_post(request):
     if not title or not description:
         return HTTPBadRequest()
     post = Post(title, description, image)
-    if wsgi.redis_connection.get(post.title):
+    if await request.app['redis'].get(post.title):
         return HTTPBadRequest(text='Duplicate Title!')
     await post.store_image()
-    wsgi.redis_connection.set(title, post.as_dict())
+    await request.app['redis'].set(title, post.as_string())
     return HTTPFound('/')
 
