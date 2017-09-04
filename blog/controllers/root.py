@@ -27,37 +27,39 @@ async def login_handler(request):
     username = params.get('username')
     password = params.get('password')
     session = await get_session(request)
-    # If already logged in
-    if 'token' in session and session['token'] == request.app['config'].get('token'):
-        return HTTPFound('/')
     if username and password:
-        result = json.loads(request.app['config'].get('admin').decode())
-        if username == result['username'] and password == result['password']:
-            session['token'] = request.app['config'].get('token')
+        admin = request.app['config'].get('admin')
+        admin_passwod = request.app['config'].get('password')
+        if username == admin and password == admin_passwod:
+            session['allowed'] = True
             return HTTPFound('/admin')
         else:
-            return HTTPUnauthorized()
+            raise HTTPUnauthorized()
     else:
-        return HTTPBadRequest()
+        raise HTTPBadRequest()
 
 
 @template('admin.mak')
-# @authorize
 async def admin(request):
+    session = await get_session(request)
+    if not session.get('allowed'):
+        raise HTTPUnauthorized()
     return dict()
 
 
-# @authorize
 async def submit_post(request):
+    session = await get_session(request)
+    if not session.get('allowed'):
+        return HTTPUnauthorized()
     params = await request.post()
     title = params.get('title')
     description = params.get('description')
     image = params.get('image')
     if not title or not description:
-        return HTTPBadRequest()
+        raise HTTPBadRequest()
     post = Post(title, description, image)
     if await request.app['redis'].get(post.title):
-        return HTTPBadRequest(text='Duplicate Title!')
+        raise HTTPBadRequest(text='Duplicate Title!')
     await post.store_image()
     await request.app['redis'].set(title, post.as_string())
     return HTTPFound('/')

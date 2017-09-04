@@ -14,6 +14,6 @@ def routes():
         Route('GET', '/', index),
         Route('GET', '/admin', admin),
         Route('POST', '/login_handler', login_handler),
-        Route('POST', '/login', login),
+        Route('GET', '/login', login),
         Route('POST', '/admin/submit_post', submit_post)
 ]

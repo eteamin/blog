@@ -2,6 +2,6 @@
   "redisHost": "localhost",
   "redisPort": 6379,
   "redisDB": 14,
-  "admin": "1",
-  "password": "1"
+  "admin": "admin",
+  "password": "yesididit"
 }

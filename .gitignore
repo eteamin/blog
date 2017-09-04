@@ -90,6 +90,5 @@ ENV/
 
 # Pycharm
 .idea/
-blog/public/css/
-blog/public/js/
 blog/public/storage/
+production.json

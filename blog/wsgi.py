@@ -6,6 +6,8 @@ from os import path
 from aiohttp.web import Application, run_app
 from aiohttp_mako import setup as mako_setup, TemplateLookup
 from aiohttp_session import setup
+from aiohttp_session.redis_storage import RedisStorage
+from aioredis import create_pool
 import asyncio_redis
 
 from aiohttp_session.redis_storage import RedisStorage
@@ -43,6 +45,16 @@ def setup_mako_templates(app):
 
 
 async def init_session(app):
+    config = app['config']
+    redis_host = config.get('redisHost')
+    redis_port = config.get('redisPort')
+    redis_db = config.get('redisDB')
+
+    pool = await create_pool((redis_host, redis_port), db=redis_db)
+    setup(app, RedisStorage(pool))
+
+
+async def init_db_session(app):
     # Setup Session
     config = app['config']
     redis_host = config.get('redisHost')
@@ -62,12 +74,14 @@ def make_app():
     # Serve statics for development purposes
     blog.router.add_static('/css', path.join(STATICS, 'css'))
     blog.router.add_static('/js', path.join(STATICS, 'js'))
+    blog.router.add_static('/images', path.join(STATICS, 'images'))
     blog.router.add_static('/storage', path.join(STATICS, 'storage'))
 
     # Setup Mako
     setup_mako_templates(blog)
 
     # Setup Session
+    blog.on_startup.append(init_db_session)
     blog.on_startup.append(init_session)
 
     return blog
