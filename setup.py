@@ -12,7 +12,8 @@ install_requires = [
     'aiohttp_mako',
     'cryptography',
     'asyncio_redis',
-    'aiohttp_session'
+    'aiohttp_session',
+    'aioredis'
 ]
 
 setup(
