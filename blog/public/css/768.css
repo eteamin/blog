@@ -1,6 +1,6 @@
 
 /* TABLETS */
-@media screen and (min-width: 768px) { 
+@media screen and (min-width: 768px) {
 
     /* TYPOGRAPHY */
 	h1 {
@@ -18,18 +18,18 @@
         }
 	/* Forms */
 	input:not([type=submit]):not([type=button]):not([type=file]):not([type=radio]):not([type=checkbox]), select, .uploader, .selector {
-		max-width: 360px; 
+		max-width: 360px;
 		}
-    
-	/* HEADER */	
-	.header { 
+
+	/* HEADER */
+	.header {
 		height: 100%; width: 120px;
 		}
 	.header-wrap {
 		left: 0;
 		}
 	.menu-toggle {
-		display: none; 
+		display: none;
 		}
 	.site-title {
 		display: block; position: static; width: auto; line-height: 1.2; text-align: center; padding: .8em;
@@ -40,19 +40,19 @@
 	.nav-menu a {
 		padding: .5em .5em;
 		}
-	.nav-menu ul i:before { 
+	.nav-menu ul i:before {
 		font-size: 2.8em;
 		}
-	
+
 	/* HEADER SOCIAL */
-	.header-wrap { 
-		bottom: 0; text-align: center; 
+	.header-wrap {
+		bottom: 0; text-align: center;
 		}
-	.header-bottom { 
-		position: absolute; bottom: 0; 
+	.header-bottom {
+		position: absolute; bottom: 0;
 		}
-	
-	/* LAYOUT */	
+
+	/* LAYOUT */
 	.site-main {
 		margin-right: 120px;
 		padding-top: 0;
@@ -61,7 +61,7 @@
 		left: 120px;
 		margin: 0;
 		}
-	.modern-layout .page-layout { 
+	.modern-layout .page-layout {
 		padding-top: 0;
 		}
     /* custom scrollbars for webkit browsers */
@@ -75,7 +75,7 @@
 		}
 	.modern-layout *::-webkit-scrollbar:horizontal,
 	.single-page-layout *::-webkit-scrollbar:horizontal {
-		height: 8px; 
+		height: 8px;
 		}
 	/* show darker scrollbar path for pages with bg image */
 	.modern-layout .page-layout.has-bg-img::-webkit-scrollbar {
@@ -84,32 +84,32 @@
 	.modern-layout .page-layout.has-bg-img::-webkit-scrollbar-thumb {
 		background-color: rgba(255, 255, 255, 0.25);
 		}
-	
-	/* PAGES */	
+
+	/* PAGES */
 	.hentry {
 		padding: 0 0 4em 0;
 		}
 	.entry-header {
-		padding-top: 4em; 
+		padding-top: 4em;
 		}
 	.entry-title {
-		margin-top: .4em; 
+		margin-top: .4em;
 	 	}
 	.entry-content {
-		margin-top: 3em; 
+		margin-top: 3em;
 		}
-	
+
     /* 404 */
     .http-alert h1 {
         font-size: 14em;
     	}
- 	
+
 	/* PROCESS */
-	.row [class^="col-"]:nth-child(n) .process:after { 
-		display: inline-block; 
+	.row [class^="col-"]:nth-child(n) .process:after {
+		display: inline-block;
 		}
-    .row [class^="col-"]:last-child .process:after { 
-		display: none; 
+    .row [class^="col-"]:last-child .process:after {
+		display: none;
 		}
 
     /* blockquote  */
@@ -119,8 +119,8 @@
     blockquote:before {
         font-size: 1.0em;
         }
-    
-    
+
+
     /* CONTACT FORM */
 	.contact-form p,
 	nf-field:nth-child(1),
@@ -134,19 +134,19 @@
 		}
 	.contact-form p:nth-of-type(n+3){
 		 width: 100%;
-		}	
-    
+		}
+
     /* MEDIA GRID */
 	.media-grid .media-cell {
  		float: left; width: 25%; padding: 0 20px; margin-bottom: 40px;
 		}
-	
+
 	/* MEDIA BOX */
 	.media-grid .media-cell {
  		float: left; width: 50%;
 		}
-    
-    
+
+
     /* TIMELINE */
     .event {
         padding: 0 4em 3em 1em;
@@ -157,7 +157,7 @@
     .event [class^="icon-"], .event [class*=" icon-"], .event .fa {
         font-size: 25px; top: -16px; left: -20px; width: 66px; line-height: 66px; margin: 0;  z-index: 120;
         }
-    
+
 	/* PORTFOLIO SINGLE */
 	.portfolio-single .entry-content {
 		padding-top: 2em;
@@ -174,10 +174,10 @@
 	.mini-text .button{
 		margin: 3em 0;
 		}
-	
+
 	/* PAGE : HOME */
-	.home-section .content > div { 
-		font-size: 150%; 
+	.home-section .content > div {
+		font-size: 150%;
 		}
 	.home-section h2,
 	.home-section h3 {
@@ -191,7 +191,7 @@
 	.home-section h4 {
 		font-size: .75em;
 		}
-	
+
 	/* BLOG */
 	.post .entry-content > p img:not(.alignleft):not(.alignright),
 	.post .entry-content .gallery {
@@ -199,17 +199,17 @@
 		max-width: none;
 		margin-right: -16%;
 		}
-		
-	/* format-link */	
+
+	/* format-link */
 	.format-link .entry-content  > p:first-child a:first-child {
 		font-size: 1.2em;
 		}
-		
+
 	/* BLOG SINGLE */
 	.related-posts .media-grid .media-cell {
  		float: left; width: 33.33%;
 		}
-	
+
 	/* COMMENTS */
     .comments-area {
         padding: 2em 0;
@@ -233,10 +233,10 @@
     .comments-area ol ol {
         margin-left: 8%
         }
-	
+
 	/* Comment Form */
-    #respond form p { 
-        margin-bottom: 0; 
+    #respond form p {
+        margin-bottom: 0;
         }
     .comment-form-author,
     .comment-form-email,
@@ -247,64 +247,64 @@
         width: 34%; margin-right: 0;
         }
     .form-allowed-tags,
-    .form-submit { 
-        clear: left; 
+    .form-submit {
+        clear: left;
         }
     .form-submit {
         padding-top: 2em;
         }
-    
+
     /* FOOTER */
     .site-footer {
         margin-top: 4em;
         }
-		
+
 	/* FOOTER WIDGETS */
     .site-footer .widget-area .widget {
         width: 33.3%;
         float: right;
         padding: 0 1em 1em 1.5em;
-        }	
+        }
     .site-footer .widget-area .widget:first-child {
         padding-right: 0;
         }
-    .site-footer .widget-area .widget:nth-child(3n) { 
+    .site-footer .widget-area .widget:nth-child(3n) {
         padding-right: 0;
         }
-		
+
 	/* Social Feed */
 	.social-feed ul li,
 	.null-instagram-feed ul li, {
-		width: 50%; 
+		width: 50%;
 		}
 	.social-feed ul li img,
 	.null-instagram-feed ul li img {
 		max-width: 100%; width: 100%;
 		}
-		
+
 }
 
 
 
-/* DESKTOPS OLD */	
-@media screen and (min-width: 992px) { 
-	
+/* DESKTOPS OLD */
+@media screen and (min-width: 992px) {
+
 	/* SECTION TITLE */
-    .section-title { 
-		margin: 3em 0 2em; 
+    .section-title {
+		margin: 3em 0 2em;
 		}
-	
+
 	/* MEDIA BOX */
 	.media-grid .media-cell {
  		float: left; width: 33.33%;
 		}
-    
+
     /* SERVICES */
     .service {
         padding: 0.6em 0 0; text-align: center;
     	}
     .service i,
-	.service img { 
+	.service img {
         float: none; width: auto; max-width: 84px; line-height: 1; font-size: 64px; margin-bottom: 18px;
     	}
     .service p {
@@ -313,7 +313,7 @@
     .service h4 {
         margin-left: 0; margin-bottom: .8em;
     	}
-	
+
 	/* BLOG */
 	.post .entry-content > p img:not(.alignleft):not(.alignright),
 	.post .entry-content .gallery {
@@ -321,29 +321,29 @@
 		margin-right: -29%;
 		}
 	/* BLOG SINGLE */
-	.blog-single .entry-content { 
-		max-width: 540px; 
+	.blog-single .entry-content {
+		max-width: 540px;
 		}
-		
+
 	/* Social Feed Widget */
 	.social-feed ul li,
 	.null-instagram-feed ul li {
-		width: 33.3%; 
+		width: 33.3%;
 		}
-		   
+
 }
 
 
 
 /* DESKTOPS MEDIUM */
-@media screen and (min-width: 1200px) { 
-    
+@media screen and (min-width: 1200px) {
+
 	/* TYPOGRAPHY */
     h1 {
 		font-size: 4em;
-		line-height: 1;1
+		line-height: 1;
 		}
-	
+
 	 /* increase column gutter on large screens */
 	 .row {
 		margin-left: -30px;
@@ -354,18 +354,18 @@
 		}
 
 	/* PROCESS */
-	.process { 
+	.process {
 		width: 108px; height: 108px; padding: 20px 10px;
 		}
-	.process i { 
+	.process i {
 		font-size: 48px;
 		}
-	.process h4 { 
+	.process h4 {
 		font-size: 11px; margin-top: 5px;
 		}
-    
+
     /* FUN FACT */
-    .fun-fact { 
+    .fun-fact {
         padding-right: 0em; margin-bottom: 0em; text-align: right;
         }
 	.fun-fact i {
@@ -380,33 +380,33 @@
 		padding-top: 16px;
 		max-width: 160px;
 		font-size: 14px;
-		}	
-	
+		}
+
 	/* CLIENT */
-	.client img { 
+	.client img {
 		max-height: 66px;
 		}
-		
+
 }
 
 
 
-/* DESKTOPS LARGE */	
-@media screen and (min-width: 1400px) { 
-		
+/* DESKTOPS LARGE */
+@media screen and (min-width: 1400px) {
+
 	/* LAYOUT */
 	.entry-header {
-		padding-top: 6em; 
+		padding-top: 6em;
 		}
-	
+
 	/* SECTION TITLE */
-	.section-title { 
-		margin: 4.4em 0 2.4em; 
+	.section-title {
+		margin: 4.4em 0 2.4em;
 		}
-	
+
 	/* HOME */
-	.home-section .content > div { 
-		font-size: 250%; 
+	.home-section .content > div {
+		font-size: 250%;
 		}
 	.home-section h2 {
 		letter-spacing: -4px;
@@ -414,24 +414,24 @@
 	.home-section h4 {
 		font-size: .6em;
 		}
-	
+
     /* 404 */
     .http-alert h1 {
         font-size: 18em; margin-bottom: .25em;
     }
 }
 
-/* DESKTOPS EXTRA LARGE */	
-@media screen and (min-width: 1660px) { 
-	
+/* DESKTOPS EXTRA LARGE */
+@media screen and (min-width: 1660px) {
+
 	/* SECTION TITLE */
-	.section-title { 
-		margin: 6em 0 3em; 
+	.section-title {
+		margin: 6em 0 3em;
 		}
-    
+
     /* FILTERS */
     .filters {
         margin: 2em 0;
         }
-		
+
 }

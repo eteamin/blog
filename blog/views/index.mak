@@ -6,7 +6,7 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="description" content="">
         <meta name="keywords" content="Python, WebDeveloper">
-        <meta name="author" content="Pixelwars">
+        <meta name="author" content="Amin Etesamian">
 
         <title>Amin Etesamian - امین اعتصامیان</title>
 

@@ -105,18 +105,18 @@ label,
 .radio span:before,
 .uploader span.action:before,
 .menu-toggle:before  {
-   font-family: 'Roboto', sans-serif;
+    font-family:fontello; font-style:normal; font-weight:400; speak:none; display:inline-block; text-
 
 decoration:inherit; text-align:center; font-variant:normal; text-transform:none;
     }
-	
+
 /* PE 7S ICONS */
 .mask,
 .site-alert:before,
 .portfolio-nav a:before,
 .hentry .entry-header:before,
 .gallery-item a:after {
-	display: inline-block; font-family: 'Roboto', sans-serif;; speak: none; font-style: normal; font-weight:
+	display: inline-block; font-family: 'Pe-icon-7-stroke'; speak: none; font-style: normal; font-weight:
 
 normal; font-variant: normal; text-transform: none; line-height: 1; -webkit-font-smoothing: antialiased; -
 
@@ -593,13 +593,14 @@ auto; -webkit-overflow-scrolling: touch;
 		}
 	.header,
 	.header-wrap {
+		direction: ltr;
 		background: #1c262b;
 		}
 	.site-title {
  		display: none;
  		position: absolute;
  		top: 0;
- 		right: 70px;
+ 		left: 70px;
  		width: 252px;
  		line-height: 50px;
  		margin: 0;
@@ -628,7 +629,7 @@ overflow: hidden; color: #fff;
 .menu-toggle {
 	position: absolute;
 	top: 0;
-	right: 0;
+	left: 0;
 	border-left: 2px solid rgba(255, 255, 255, 0.08);
 	}
 .is-menu-toggled-on .menu-toggle {
@@ -650,9 +651,9 @@ body {
     }
 .csstransforms.is-menu-toggled-on body { 
     right: 0;
-    -ms-transform: translate(-120px,0px); 
-    -webkit-transform: translate(-120px,0px); 
-    transform: translate(-120px,0px); 
+    -ms-transform: translate(120px,0px);
+    -webkit-transform: translate(120px,0px);
+    transform: translate(120px,0px);
 	}
 
 /* NAV MENU */
@@ -3072,7 +3073,7 @@ animation-fill-mode: both;
 body {
  	color: #345;
  	background: #2E363A;
- 	direction: rtl;
+ 	direction: ltr;
  }
 /* Links */
 a {

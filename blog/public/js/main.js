@@ -86,10 +86,10 @@ var mapCanvas;
 				$('html').addClass('modern-layout');
 				$.address.change(function() {
 					setActivePage();
-					$('html').removeClass('is-menu-toggled-on');	
+					$('html').removeClass('is-menu-toggled-on');
 					});
 			}
-			
+
 			// don't change hash tag if isAnimating
 			$('.nav-menu a').on("click", function() {
 				if( window.isAnimating ) {
@@ -113,7 +113,7 @@ var mapCanvas;
 
 
 
-		
+
 		// ------------------------------
 		// SETUP
 		setup();
@@ -173,6 +173,72 @@ var mapCanvas;
 		// ------------------------------
 
 
+
+
+		// ------------------------------
+		/* jQuery Ajax Mail Send Script */
+		var contactForm = $( '#contact-form' );
+		var $alert = $('.site-alert');
+		var $submit = contactForm.find('.submit');
+
+		contactForm.submit(function()
+		{
+			if (contactForm.valid())
+			{
+				NProgress.start();
+				$submit.addClass("active loading");
+				var formValues = contactForm.serialize();
+
+				$.post(contactForm.attr('action'), formValues, function(data)
+				{
+					if ( data == 'success' ) {
+						contactForm.clearForm();
+					}
+					else {
+						$alert.addClass('error');
+					}
+					NProgress.done();
+					$alert.show();
+					setTimeout(function() { $alert.hide(); },6000)
+				});
+			}
+			return false
+		});
+
+		$.fn.clearForm = function() {
+		  return this.each(function() {
+		    var type = this.type, tag = this.tagName.toLowerCase();
+		    if (tag == 'form')
+		      return $(':input',this).clearForm();
+		    if (type == 'text' || type == 'password' || tag == 'textarea')
+		      this.value = '';
+		    else if (type == 'checkbox' || type == 'radio')
+		      this.checked = false;
+		    else if (tag == 'select')
+		      this.selectedIndex = -1;
+		  });
+		};
+		// ------------------------------
+
+
+
+		// ------------------------------
+		/* SOCIAL FEED WIDGET */
+		var socialFeed = $('.social-feed');
+		if(socialFeed.length) {
+			socialFeed.each(function() {
+				$(this).socialstream({
+					socialnetwork: $(this).data("social-network"),
+					limit: $(this).data("limit"),
+					username: $(this).data("username")
+				});
+			});
+		}
+		// ------------------------------
+
+
+
+
 		// ------------------------------
 		// PARALLAX BG VIDEO
 		var video_parallax = $(".home-section");
@@ -191,33 +257,33 @@ var mapCanvas;
 
 	});
 	// DOCUMENT READY
-	
 
 
-	
+
+
 	// WINDOW ONLOAD
 	window.onload = function() {
-		
+
 		hideLoader();
-	
+
 	};
-	// WINDOW ONLOAD	
-	
-	
-	
-	 
-	
+	// WINDOW ONLOAD
+
+
+
+
+
 	// ------------------------------
 	// ------------------------------
 		// FUNCTIONS
 	// ------------------------------
 	// ------------------------------
-	
-	
+
+
 	// ------------------------------
 	// SETUP : plugins
 	function setup() {
-		
+
 		// MASONRY
 		setupMasonry();
 
@@ -226,7 +292,7 @@ var mapCanvas;
 		setupLightbox();
 		// ------------------------------
 
-		
+
 		// ------------------------------
 		// TABS
 		$('.tabs').each(function() {
@@ -234,10 +300,10 @@ var mapCanvas;
 				$(this).find('.tab-titles li:first-child a').addClass('active');
 				$(this).find('.tab-content > div:first-child').show();
 			} else {
-				$(this).find('.tab-content > div').eq($(this).find('.tab-titles li a.active').parent().index()).show();	
+				$(this).find('.tab-content > div').eq($(this).find('.tab-titles li a.active').parent().index()).show();
 			}
 		});
-		
+
 		$('.tabs .tab-titles li a').on("click", function() {
 			if($(this).hasClass('active')) { return; }
 			$(this).parent().siblings().find('a').removeClass('active');
@@ -246,52 +312,59 @@ var mapCanvas;
 			return false;
 		});
 		// ------------------------------
-		
-		
+
+
 		// ------------------------------
 		// TOGGLES
 		var toggleSpeed = 300;
 		$('.toggle h4.active + .toggle-content').show();
-	
+
 		$('.toggle h4').on("click", function() {
-			if($(this).hasClass('active')) { 
+			if($(this).hasClass('active')) {
 				$(this).removeClass('active');
 				$(this).next('.toggle-content').stop(true,true).slideUp(toggleSpeed);
 			} else {
-				
+
 				$(this).addClass('active');
 				$(this).next('.toggle-content').stop(true,true).slideDown(toggleSpeed);
-				
+
 				//accordion
 				if($(this).parents('.toggle-group').hasClass('accordion')) {
 					$(this).parent().siblings().find('h4').removeClass('active');
 					$(this).parent().siblings().find('.toggle-content').stop(true,true).slideUp(toggleSpeed);
 				}
-				
+
 			}
 			return false;
 		});
 		// ------------------------------
-		
-		
+
 
 
 		// ------------------------------
-		
+		// RESPONSIVE VIDEOS
+		if($('iframe,video').length) {
+			$("html").fitVids();
+		}
+		// ------------------------------
+
+
 
 	}
 	// setup()
 	// ------------------------------
 
-		
+
+
+
 	// ------------------------------
 	// MASONRY - ISOTOPE
 	function setupMasonry() {
-		
+
 		var masonry = $('.masonry, .gallery');
 		if (masonry.length) {
 			masonry.each(function(index, el) {
-				
+
 				// call isotope
 				refreshMasonry();
 				$(el).imagesLoaded(function() {
@@ -301,7 +374,7 @@ var mapCanvas;
 					// set columns
 					refreshMasonry();
 				});
-				
+
 				if (!$(el).data('isotope')) {
 					// filters
 					var filters = $(el).siblings('.filters');
@@ -314,52 +387,52 @@ var mapCanvas;
 							});
 						}
 				}
-				
+
 			}); //each
 		}
-	}			
+	}
 	$(window).on('resize debouncedresize', function() {
     	refreshMasonry();
 	});
 	// ------------------------------
-		
+
 	// ------------------------------
 	// REFRSH MASONRY - ISOTOPE
 	function refreshMasonry() {
-		
+
 		var masonry = $('.masonry');
 		if (masonry.length) {
 			masonry.each(function(index, el) {
-				
+
 				// check if isotope initialized
 				if ($(el).data('isotope')) {
-					
+
 					var itemW = $(el).data('item-width');
 					var containerW = $(el).width();
 					var items = $(el).children('.hentry');
 					var columns = Math.round(containerW/itemW);
-				
+
 					// set the widths (%) for each of item
 					items.each(function(index, element) {
 						var multiplier = $(this).hasClass('x2') && columns > 1 ? 2 : 1;
 						var itemRealWidth = (Math.floor( containerW / columns ) * 100 / containerW) * multiplier ;
 						$(this).css( 'width', itemRealWidth + '%' );
 					});
-				
+
 					var columnWidth = Math.floor( containerW / columns );
-					
+
 					$(el).isotope( 'option', { masonry: { columnWidth: columnWidth } } );
 					$(el).isotope('layout');
 					}
-				
+
 			}); //each
 		}
-	}	
+	}
 	// ------------------------------
-	
-	
-	
-	
+
+
+
+
 
 
 	// ------------------------------
@@ -542,7 +615,7 @@ var mapCanvas;
 	// ------------------------------
 
 
-	
+
 	// ------------------------------
 	// AJAX LOADER
 	function showLoader() {
@@ -552,9 +625,9 @@ var mapCanvas;
 		NProgress.done();
 	}
 	// ------------------------------
-	
-	
-	
+
+
+
 
 
 	// ------------------------------
