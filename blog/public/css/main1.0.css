@@ -465,9 +465,6 @@ center center; background-color: #fff;
 .single-page-layout body { 
 	background: #fff; 
 	}
-.one-page-layout .page-layout { 
-	visibility: hidden;
-	}
 .one-page-layout .page-layout:not(.portfolio-single) .entry-content {
 	max-width: 600px; margin-left: auto; margin-right: auto; text-align: center; font-size: .91em;
 	}

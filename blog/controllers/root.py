@@ -17,6 +17,13 @@ async def index(request):
     return dict(posts=posts, base_url=request.app['config'].get('base_url'))
 
 
+@template('post.mak')
+async def single(request):
+    title = request.rel_url.name
+    post = await request.app['redis'].get(title)
+    return dict(post=json.loads(post), base_url=request.app['config'].get('base_url'))
+
+
 @template('login.mak')
 async def login(request):
     return dict()

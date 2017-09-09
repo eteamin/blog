@@ -6,19 +6,19 @@ from os import path
 from aiohttp.web import Application, run_app
 from aiohttp_mako import setup as mako_setup, TemplateLookup
 from aiohttp_session import setup
-from aiohttp_session.redis_storage import RedisStorage
 from aioredis import create_pool
 import asyncio_redis
 
 from aiohttp_session.redis_storage import RedisStorage
 
-from blog.routes import routes
+from blog.routes import routes, resources
+
 
 views_path = path.abspath(path.join(path.dirname(__file__), 'views'))
 mako_tmp_path = path.abspath(path.join(path.dirname(__file__), 'mako_tmp'))
 mako_lookup = TemplateLookup([views_path], module_directory=mako_tmp_path)
 STATICS = path.abspath(path.join(path.dirname(__file__), 'public'))
-configuration_file = path.abspath(path.join(path.dirname(__file__), 'production.json'))
+configuration_file = path.abspath(path.join(path.dirname(__file__), 'configuration.json'))
 
 
 def load_conf():
@@ -42,6 +42,9 @@ def setup_mako_templates(app):
 
     login_template = mako_lookup.get_template('login.mak')
     mako_engine.put_template('login.mak', login_template)
+
+    post_template = mako_lookup.get_template('post.mak')
+    mako_engine.put_template('post.mak', post_template)
 
 
 async def init_session(app):
@@ -71,6 +74,10 @@ def make_app():
     for r in routes():
         blog.router.add_route(r.method, r.path, r.handler)
 
+    for r in resources():
+        resource = blog.router.add_resource(r.path)
+        resource.add_route(r.route.method, r.route.handler)
+
     # Serve statics for development purposes
     blog.router.add_static('/css', path.join(STATICS, 'css'))
     blog.router.add_static('/js', path.join(STATICS, 'js'))
@@ -89,3 +96,6 @@ def make_app():
 
 blog = make_app()
 
+
+if __name__ == '__main__':
+    run_app(blog, port=8585)
