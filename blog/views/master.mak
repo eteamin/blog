@@ -65,19 +65,19 @@
                         <div class="nav-menu">
                             <ul>
 							<li>
-                            <a href="#/home">
+                            <a href="${'{}/#/home'.format(base_url)}">
                                 <i class="pe-7s-home"></i>Home</a>
                             </li>
                                 <li>
-                                    <a href="#/about">
+                                    <a href="${'{}/#/about'.format(base_url)}">
                                         <i class="pe-7s-user"></i>About Me</a>
                                 </li>
                                 <li>
-                                    <a href="#/blog">
+                                    <a href="${'{}/#/blog'.format(base_url)}">
                                         <i class="pe-7s-notebook"></i>Blog</a>
                                 </li>
                                 <li>
-                                    <a href="#/contact">
+                                    <a href="${'{}/#/contact'.format(base_url)}">
                                         <i class="pe-7s-call"></i>Contact</a>
                                 </li>
 

@@ -34,6 +34,10 @@ def setup_mako_templates(app):
         output_encoding='utf-8',
         default_filters=['decode.utf8']
     )
+
+    master_template = mako_lookup.get_template('master.mak')
+    mako_engine.put_template('master.mak', master_template)
+
     index_template = mako_lookup.get_template('index.mak')
     mako_engine.put_template('index.mak', index_template)
 
