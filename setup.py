@@ -10,7 +10,6 @@ install_requires = [
     'aiohttp',
     'aiofiles',
     'aiohttp_mako',
-    'cryptography',
     'asyncio_redis',
     'aiohttp_session',
     'aioredis'

@@ -3,5 +3,6 @@
   "redisPort": 6379,
   "redisDB": 14,
   "admin": "1",
-  "password": "1"
+  "password": "1",
+  "base_url": "http://localhost:8585"
 }

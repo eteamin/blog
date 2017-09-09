@@ -48,7 +48,7 @@ async def init_session(app):
     config = app['config']
     redis_host = config.get('redisHost')
     redis_port = config.get('redisPort')
-    redis_db = config.get('redisDB')
+    redis_db = int(config.get('redisDB')) - 1
 
     pool = await create_pool((redis_host, redis_port), db=redis_db)
     setup(app, RedisStorage(pool))

@@ -1,5 +1,6 @@
 from os import path
 import json
+from datetime import datetime
 
 import aiofiles
 
@@ -12,9 +13,17 @@ class Post(object):
         self.title = title  # Unique
         self.description = description
         self.image = image
+        self.created = datetime.now()
 
     def as_string(self):
-        return json.dumps(dict(title=self.title, description=self.description, image=True if self.image else False))
+        return json.dumps(
+            dict(
+                title=self.title,
+                description=self.description,
+                image=True if self.image else False,
+                created=str(self.created)
+            )
+        )
 
     async def store_image(self):
         if self.image:

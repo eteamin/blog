@@ -14,7 +14,7 @@ async def index(request):
     for r in all:
         v = await request.app['redis'].get(r.result())
         posts.append(json.loads(v))
-    return dict(posts=posts)
+    return dict(posts=posts, base_url=request.app['config'].get('base_url'))
 
 
 @template('login.mak')
@@ -61,6 +61,6 @@ async def submit_post(request):
     if await request.app['redis'].get(post.title):
         raise HTTPBadRequest(text='Duplicate Title!')
     await post.store_image()
-    await request.app['redis'].set(title, post.as_string())
+    await request.app['redis'].set(title.replace(' ', '-'), post.as_string())
     return HTTPFound('/')
 

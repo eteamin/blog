@@ -1,3 +1,9 @@
+<%
+    from datetime import datetime
+    def string_to_datetime(s):
+        return datetime.strptime(s, '%Y-%m-%d %H:%M:%S.%f')
+%>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js one-page-layout" data-mobile-classic-layout="false" data-classic-layout="false" data-prev-animation="16" data-next-animation="15" data-random-animation="false">
     <head>
@@ -269,27 +275,29 @@
     
                         <!-- LATEST POSTS -->
                         <div class="latest-posts media-grid masonry" data-layout="masonry" data-item-width="340">
-    
-<!--##                             &lt;!&ndash; post &ndash;&gt;-->
-<!--##                             <article class="hentry media-cell">-->
-<!--##-->
-<!--##                                 <div class="media-box">-->
-<!--##                                     <img src="images/blog/01.jpg" alt="post-image">-->
-<!--##                                     <div class="mask"></div>-->
-<!--##                                     <a href="blog-single.html"></a>-->
-<!--##                                 </div>-->
-<!--##-->
-<!--##                                 <header class="media-cell-desc">-->
-<!--##                                     <span title="2013" class="date">-->
-<!--##                                         <span class="day">18</span>خرداد</span>-->
-<!--##                                     <h3>-->
-<!--##                                         <a href="blog-single.html">20 روش برای طراحی بهترین ها</a>-->
-<!--##                                     </h3>-->
-<!--##                                 </header>-->
-<!--##-->
-<!--##                             </article>-->
-<!--##                             &lt;!&ndash; post &ndash;&gt;-->
-<!--##-->
+
+                            %for p in posts:
+
+                                <!-- post -->
+                                <article class="hentry media-cell">
+
+                                    <div class="media-box">
+                                        <img src="${'{}/storage/{}'.format(base_url, p.get('title'))}" alt="post-image">
+                                        <div class="mask"></div>
+                                        <a href="${'{}/posts/{}'.format(base_url, p.get('title').replace(' ', '-'))}"></a>
+                                    </div>
+
+                                    <header class="media-cell-desc">
+                                        <span title="2013" class="date">
+                                            <span class="day">${string_to_datetime(p.get('created')).day}</span>${string_to_datetime(p.get('created')).strftime('%B')}</span>
+                                        <h3>
+                                            <a href="${'{}/posts/{}'.format(base_url, p.get('title').replace(' ', '-'))}">${p.get('title')}</a>
+                                        </h3>
+                                    </header>
+
+                                </article>
+                                <!-- post -->
+                            %endfor
     
     
                         </div>
