@@ -36,4 +36,4 @@ class Post(object):
 
     @property
     def image_path(self):
-        return '{}/{}'.format(STORAGE, self.title)
+        return '{}/{}'.format(STORAGE, self.title.replace(' ', '_'))

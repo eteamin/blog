@@ -87,6 +87,5 @@ def make_app():
     return blog
 
 
-if __name__ == '__main__':
-    run_app(make_app(), port=8585)
+blog = make_app()
 

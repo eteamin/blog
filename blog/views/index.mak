@@ -282,7 +282,7 @@
                                 <article class="hentry media-cell">
 
                                     <div class="media-box">
-                                        <img src="${'{}/storage/{}'.format(base_url, p.get('title'))}" alt="post-image">
+                                        <img src="${'{}/storage/{}'.format(base_url, p.get('title').replace(' ', '_'))}" alt="post-image">
                                         <div class="mask"></div>
                                         <a href="${'{}/posts/{}'.format(base_url, p.get('title').replace(' ', '-'))}"></a>
                                     </div>
