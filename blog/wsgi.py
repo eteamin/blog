@@ -18,7 +18,7 @@ views_path = path.abspath(path.join(path.dirname(__file__), 'views'))
 mako_tmp_path = path.abspath(path.join(path.dirname(__file__), 'mako_tmp'))
 mako_lookup = TemplateLookup([views_path], module_directory=mako_tmp_path)
 STATICS = path.abspath(path.join(path.dirname(__file__), 'public'))
-configuration_file = path.abspath(path.join(path.dirname(__file__), 'configuration.json'))
+configuration_file = path.abspath(path.join(path.dirname(__file__), 'production.json'))
 
 
 def load_conf():
