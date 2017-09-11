@@ -14,14 +14,25 @@ async def index(request):
     for r in all:
         v = await request.app['redis'].get(r.result())
         posts.append(json.loads(v))
-    return dict(posts=posts, base_url=request.app['config'].get('base_url'))
+    return dict(
+        title='Amin Etesamian',
+        description='Amin Etesamian Blog',
+        posts=posts,
+        base_url=request.app['config'].get('base_url')
+    )
 
 
 @template('post.mak')
 async def single(request):
     title = request.rel_url.name
-    post = await request.app['redis'].get(title)
-    return dict(post=json.loads(post), base_url=request.app['config'].get('base_url'))
+    post_string = await request.app['redis'].get(title)
+    post = json.loads(post_string)
+    return dict(
+        title=post.get('title'),
+        description=post.get('description')[:25],
+        post=post,
+        base_url=request.app['config'].get('base_url')
+    )
 
 
 @template('login.mak')
